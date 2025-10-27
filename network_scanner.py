@@ -1,5 +1,7 @@
-from scapy.all import srp
+from scapy.all import srp, sr1
 from scapy.layers.l2 import ARP, Ether
+from scapy.layers.inet import IP, ICMP
+import ipaddress
 import sys
 
 target_network = sys.argv[1]
@@ -22,3 +24,15 @@ print("IP"+ " "*22 +"MAC")
 
 for client in online_clients:
     print('{}\t\t{}'.format(client['ip'], client['mac']))
+
+
+
+# print("[+] Scanning with ICMP..")
+#
+# ip_list = [str(ip) for ip in ipaddress.IPv4Network(target_network, False)]
+#
+# for ip in ip_list:
+#     probe = IP(dst=ip)/ICMP()
+#     result = sr1(probe, timeout=3, verbose=0)
+#     if result:
+#         print("[+] {} is online".format(ip))
